@@ -1,7 +1,13 @@
 package Sorting;
 
 public class insertion {
-    public static void sort(Comparable[] a){
+
+    private static Comparable[] a = {1,3,2,7,9,6,5,3};
+    public static void main(String[] args){
+        sort();
+        System.out.println(a.toString());
+    }
+    public static void sort(){
         int N = a.length;
         for (int i = 0; i<N;i++){
             int min = i;
@@ -10,6 +16,7 @@ public class insertion {
                     min = j;
                 }
             }
+            exch(i, min);
         }
     }
 
@@ -17,7 +24,7 @@ public class insertion {
         return x.compareTo(y) < 0;
     }
 
-    public static Comparable[] exch(Comparable[] a, int i, int j){
+    public static Comparable[] exch(int i, int j){
         Comparable temp = a[i];
         a[i] = a[j];
         a[j] = temp;
