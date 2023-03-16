@@ -5,11 +5,26 @@ import java.util.Arrays;
 public class MergeSort {
     public static void main(String[] args){
         int[] arr1 = {1,2,3,4,5,3,6,8,9};
-        int[] a = MergeSort(arr1, 0, 4, 8);
-        System.out.println(Arrays.toString(a));
+        sort(arr1, 0, arr1.length-1);
+        System.out.println(Arrays.toString(arr1));
     }
 
-    public static int[] MergeSort(int[] arr1, int beg, int mid, int end) {
+    public static void sort(int arr1[], int l, int r)
+    {
+        if (l < r) {
+            // Find the middle point
+            int m = l + (r - l) / 2;
+  
+            // Sort first and second halves
+            sort(arr1, l, m);
+            sort(arr1, m + 1, r);
+  
+            // Merge the sorted halves
+            MergeSort(arr1, l, m, r);
+        }
+    }
+
+    public static void MergeSort(int[] arr1, int beg, int mid, int end) {
         
 
         int n1 = mid - beg + 1;    
@@ -31,10 +46,10 @@ public class MergeSort {
 
         i=0;
         j=0;
-        k=0;
+        k=beg;
 
         while(i < n1 && j < n2){
-            if (LeftArray[i] < RightArray[j]){
+            if (LeftArray[i] <= RightArray[j]){
                 arr1[k] = LeftArray[i];
                 i++;
             }
@@ -47,7 +62,18 @@ public class MergeSort {
             k++;
 
         }
-        return arr1;
+
+        while (i < n1) {
+            arr1[k] = LeftArray[i];
+            i++;
+            k++;
+        }
+  
+        while (j < n2) {
+            arr1[k] = RightArray[j];
+            j++;
+            k++;
+        }
 
 
     }
